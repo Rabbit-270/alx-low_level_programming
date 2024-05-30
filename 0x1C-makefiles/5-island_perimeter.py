@@ -6,16 +6,16 @@ island perimeter
 
 def island_perimeter(grid):
     ''' calculates the island perimeter of grid. '''
-    length = 0
-    width = 0
-    for n in range(len(grid)):
-        current_grid = grid[n]
-        num_ones = 0
-        for o in range(len(current_grid)):
-            if current_grid[o] == 1:
-                num_ones += 1
-        if num_ones != 0:
-            length += 1
-        if num_ones > width:
-            width = num_ones
-    return 2 * (length + width)
+    ret = 0
+    for y, row in enumerate(grid):
+        for x, cell in enumerate(row):
+            if cell == 1:
+                if y == 0 or grid[y - 1][x] == 0:
+                    ret += 1
+                if y == len(grid) - 1 or grid[y + 1][x] == 0:
+                    ret += 1
+                if x == 0 or grid[y][x - 1] == 0:
+                    ret += 1
+                if x == len(row) - 1 or grid[y][x + 1] == 0:
+                    ret += 1
+    return ret
